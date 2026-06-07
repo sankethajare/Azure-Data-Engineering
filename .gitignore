@@ -7,3 +7,7 @@
 # Allow the banking project folder and its contents
 !banking project/
 !banking project/**
+
+# Allow the healthcare project folder and its contents
+!healthcare project/
+!healthcare project/**
