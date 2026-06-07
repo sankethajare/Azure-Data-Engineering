@@ -19,6 +19,9 @@ The project processes a comprehensive banking dataset comprising 10 relational t
 
 ## 🛠️ Technology Stack
 * **Cloud Infrastructure:** Microsoft Azure
+* **Data Ingestion & Orchestration:** Azure Data Factory (ADF)
+* **On-Premises Connectivity:** Self-Hosted Integration Runtime (SHIR)
+* **Secrets Management / Security:** Azure Key Vault
 * **Data Storage:** Azure Data Lake Storage Gen2 (ADLS Gen2)
 * **Compute / Processing:** Azure Databricks (PySpark)
 * **Data Lakehouse Format:** Delta Lake (ACID transactions, schema enforcement)
@@ -27,15 +30,30 @@ The project processes a comprehensive banking dataset comprising 10 relational t
 
 ---
 
+## 🔌 ADF Ingestion Pipeline
+To securely and automatically ingest data from the on-premises database environment to the cloud, the project implements a robust **Azure Data Factory (ADF)** orchestrator:
+* **Self-Hosted Integration Runtime (SHIR):** Established a secure gateway to transfer the 10 banking CSV files from the on-premises source environment into the ADLS Gen2 `raw` container without exposing the source network to the public internet.
+* **Dynamic Ingestion Logic:**
+  * **GetMetadata Activity:** Validates file availability and structure before starting the transfer.
+  * **ForEach Loop:** Iterates through files to process them individually and concurrently.
+  * **Parameterized Configurations:** Utilizes ADF `Set Variable` and parameters to handle file naming dynamically, allowing ingestion of millions of files dynamically without manual pipeline modification.
+* **Scheduling & Monitoring:**
+  * **Daily Schedule Trigger:** Configured to run automatically at **1:00 AM IST** for consistent batch processing.
+  * **On-Failure Alerting:** Implemented conditional execution paths; if any activity fails, an **ADF Web Activity** triggers an automated email alert detailing the execution failure and the specific `Pipeline Run ID`.
+* **Enterprise Security:** All connection strings, database credentials, and service keys are secured in **Azure Key Vault** and dynamically accessed via ADF Linked Services.
+
+---
+
 ## 📐 Medallion Architecture Implementation
 
 ```mermaid
 graph TD
-    A[(Raw Data: 10 CSVs)] -->|Ingestion & Metadata Addition| B[(Bronze Layer: Delta Tables)]
-    B -->|Cleaning, Validation & Standardization| C[(Silver Layer: Enriched Delta)]
-    C -->|Aggregations & Business KPIs| D[(Gold Layer: Analytical Tables)]
-    D -->|Serverless SQL Views| E[Azure Synapse Analytics]
-    E -->|Business Intelligence| F[BI Dashboards / Reports]
+    A[On-Premises Source] -->|ADF Pipeline & SHIR| B[(Raw Data: 10 CSVs)]
+    B -->|Ingestion & Metadata Addition| C[(Bronze Layer: Delta Tables)]
+    C -->|Cleaning, Validation & Standardization| D[(Silver Layer: Enriched Delta)]
+    D -->|Aggregations & Business KPIs| E[(Gold Layer: Analytical Tables)]
+    E -->|Serverless SQL Views| F[Azure Synapse Analytics]
+    F -->|Business Intelligence| G[BI Dashboards / Reports]
 ```
 
 ### 1. Ingestion & Raw Layer
