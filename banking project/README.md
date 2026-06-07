@@ -105,7 +105,7 @@ Based on the Gold Layer business aggregations, the Power BI team can build an ex
 * Azure Synapse Analytics Workspace.
 
 ### Deployment Walkthrough
-A complete step-by-step deployment guide is available in the [Banking Project.pdf](file:///C:/Users/sanke/Videos/Project/Banking%20Project.pdf) document, detailing:
+A complete step-by-step deployment guide is available in the [Banking Project.pdf](Banking%20Project.pdf) document, detailing:
 1. Azure Resource Group & Storage Container setups.
 2. Databricks Cluster configuration (Spark 3.4.1 / Scala 2.12).
 3. Unity Catalog storage credential and external location grants.

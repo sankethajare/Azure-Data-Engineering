@@ -4,9 +4,6 @@
 # Allow the gitignore file itself
 !.gitignore
 
-# Allow the project documentation files
-!README.md
-!Banking Project.pdf
-!banking_dashboard.png
-!dax/
-!dax/dax_measures.md
+# Allow the banking project folder and its contents
+!banking project/
+!banking project/**
