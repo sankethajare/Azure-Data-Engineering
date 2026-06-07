@@ -1,0 +1,9 @@
+# Ignore all files by default
+*
+
+# Allow the gitignore file itself
+!.gitignore
+
+# Allow the project documentation files
+!README.md
+!Banking Project.pdf
