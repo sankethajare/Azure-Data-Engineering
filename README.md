@@ -90,6 +90,13 @@ Constructed 10 analytical views and aggregations for reporting:
 
 ---
 
+## 📊 Power BI Executive Dashboard
+Based on the Gold Layer business aggregations, the Power BI team can build an executive-level dashboard. Below is the conceptual design mockup showcasing the modern, glassmorphic UI with key metrics, daily transaction trends, loan distributions, and branch performance metrics:
+
+![Banking Analytics Executive Dashboard](banking_dashboard.png)
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
