@@ -1,4 +1,4 @@
-# Complete Banking Analytics Project
+# Banking Analytics Project
 
 A comprehensive, production-grade end-to-end data engineering project built on the Azure Cloud platform. This project implements a modern Lakehouse architecture (Medallion pattern: Raw → Bronze → Silver → Gold) to ingest, process, clean, and analyze banking data for business intelligence.
 
